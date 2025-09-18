@@ -30,11 +30,11 @@ jobs:
 
       - name: Build and Publish
         run: |
-          registry="$AWS_ACCOUNT_ID.dkr.ecr.eu-west-2.amazonaws.com/web-plane"
+          registry="$AWS_ACCOUNT_ID.175680165464.dkr.ecr.eu-west-2.amazonaws.com/web-plane"
           sha=$(git rev-parse --short HEAD)
           primary_tag="${registry}:${sha}"
 
-          docker build -t $primary_tag -f apps/web/Dockerfile.web .
+          docker build -t $primary_tag -f apps/web/Dockerfile.web ./apps/web
           docker push $primary_tag
 
           current_branch=$(git rev-parse --abbrev-ref HEAD)
