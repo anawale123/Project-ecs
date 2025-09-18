@@ -34,7 +34,7 @@ jobs:
           sha=$(git rev-parse --short HEAD)
           primary_tag="${registry}:${sha}"
 
-          docker build -t $primary_tag -f apps/web/Dockerfile.web ./apps/web.
+          docker build -t $primary_tag -f plane/fapps/web/Dockerfile.web ./apps/web.
           docker push $primary_tag
 
           current_branch=$(git rev-parse --abbrev-ref HEAD)
