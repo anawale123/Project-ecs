@@ -17,7 +17,7 @@ ARG TURBO_VERSION=2.5.6
 RUN corepack enable pnpm && pnpm add -g turbo@${TURBO_VERSION}
 
 # Copy only the files needed for turbo to work, for better cache usage
-COPY package.json turbo.json pnpm-workspace.yaml* ./
+COPY package.json turbo.json pnpm-workspace.yaml* ./apps/web/public
 COPY . .
 
 RUN turbo prune --scope=web --docker
