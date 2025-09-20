@@ -37,7 +37,7 @@ RUN corepack enable pnpm
 RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store pnpm fetch --store-dir=/pnpm/store
 
 COPY --from=builder /app/out/full/ .
-COPY turbo.json turbo.json
+COPY turbo.json turbo.json ./plane
 RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store pnpm install --offline --frozen-lockfile --store-dir=/pnpm/store
 
 ARG NEXT_PUBLIC_API_BASE_URL=""
