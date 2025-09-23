@@ -1,87 +1,85 @@
 # syntax=docker/dockerfile:1.7
+# *****************************************************************************
+# BASE IMAGE
+# *****************************************************************************
 FROM node:22-alpine AS base
 
-# Setup pnpm package manager with corepack and configure global bin directory for caching
+# Setup pnpm package manager with corepack
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
 # *****************************************************************************
-# STAGE 1: Build the project
+# STAGE 1: Builder
 # *****************************************************************************
 FROM base AS builder
+
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 ARG TURBO_VERSION=2.5.6
 RUN corepack enable pnpm && pnpm add -g turbo@${TURBO_VERSION}
 
-# Copy only the files needed for turbo to work, for better cache usage
-COPY package.json turbo.json pnpm-workspace.yaml* ./apps/web/public
-COPY . .
+# Copy only essential files for turbo prune to optimize cache
+COPY package.json turbo.json pnpm-workspace.yaml* /app/
+RUN mkdir /app/temp && cp -r /app/* /app/temp/
 
+WORKDIR /app/temp
 RUN turbo prune --scope=web --docker
 
+# Copy full project for building
+WORKDIR /app
+COPY . .
+
 # *****************************************************************************
-# STAGE 2: Install dependencies & build the project
+# STAGE 2: Installer (dependencies + build)
 # *****************************************************************************
 FROM base AS installer
 
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY .gitignore .plane/apps/web/.gitignore
+
+# Copy pnpm metadata from builder
 COPY --from=builder /app/out/json/ ./apps/web/
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+
 RUN corepack enable pnpm
-RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store pnpm fetch --store-dir=/pnpm/store
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
+    pnpm fetch --store-dir=/pnpm/store
 
+# Copy full app from builder
 COPY --from=builder /app/out/full/ .
+
+# Copy turbo.json explicitly
 COPY turbo.json ./plane/turbo.json
-RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store pnpm install --offline --frozen-lockfile --store-dir=/pnpm/store
 
-ARG NEXT_PUBLIC_API_BASE_URL=""
-ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
+# Install dependencies
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
+    pnpm install --offline --frozen-lockfile --store-dir=/pnpm/store
 
-ARG NEXT_PUBLIC_ADMIN_BASE_URL=""
-ENV NEXT_PUBLIC_ADMIN_BASE_URL=$NEXT_PUBLIC_ADMIN_BASE_URL
-
-ARG NEXT_PUBLIC_ADMIN_BASE_PATH="/god-mode"
-ENV NEXT_PUBLIC_ADMIN_BASE_PATH=$NEXT_PUBLIC_ADMIN_BASE_PATH
-
-ARG NEXT_PUBLIC_LIVE_BASE_URL=""
-ENV NEXT_PUBLIC_LIVE_BASE_URL=$NEXT_PUBLIC_LIVE_BASE_URL
-
-ARG NEXT_PUBLIC_LIVE_BASE_PATH="/live"
-ENV NEXT_PUBLIC_LIVE_BASE_PATH=$NEXT_PUBLIC_LIVE_BASE_PATH
-
-ARG NEXT_PUBLIC_SPACE_BASE_URL=""
-ENV NEXT_PUBLIC_SPACE_BASE_URL=$NEXT_PUBLIC_SPACE_BASE_URL
-
-ARG NEXT_PUBLIC_SPACE_BASE_PATH="/spaces"
-ENV NEXT_PUBLIC_SPACE_BASE_PATH=$NEXT_PUBLIC_SPACE_BASE_PATH
-
-ARG NEXT_PUBLIC_WEB_BASE_URL=""
-ENV NEXT_PUBLIC_WEB_BASE_URL=$NEXT_PUBLIC_WEB_BASE_URL
-
+# Build web app
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV TURBO_TELEMETRY_DISABLED=1
 
 RUN pnpm turbo run build --filter=web
 
 # *****************************************************************************
-# STAGE 3: Copy the project and start it
+# STAGE 3: Runner
 # *****************************************************************************
 FROM base AS runner
 WORKDIR /app
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Create a non-root user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
 USER nextjs
 
+# Copy the built app
 COPY --from=installer /app/apps/web/.next/standalone ./
 COPY --from=installer /app/apps/web/.next/static ./apps/web/.next/static
 COPY --from=installer /app/apps/web/public ./apps/web/public
 
+# Environment variables
 ARG NEXT_PUBLIC_API_BASE_URL=""
 ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
 
