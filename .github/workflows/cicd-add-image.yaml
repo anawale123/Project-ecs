@@ -35,7 +35,7 @@ jobs:
           primary_tag="${registry}:${sha}"
 
          
-          docker build -f plane/apps/web/Dockerfile.web -t myimage plane
+          docker build -f plane/apps/web/Dockerfile.web plane
 
          
           docker push $primary_tag
