@@ -1,4 +1,4 @@
-ame: Automating image push to AWS ECR with oidc
+name: Automating image push to AWS ECR with oidc
 
 on: [push]
 
