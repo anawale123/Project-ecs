@@ -35,10 +35,8 @@ jobs:
           primary_tag="${registry}:${sha}"
 
          
-              docker build -f umami\Dockerfile -t $primary_tag 
-
-         
-          docker push $primary_tag
+              docker build -f umami\Dockerfile -t $primary_tag .
+              docker push $primary_tag
 
           current_branch=$(git rev-parse --abbrev-ref HEAD)
           if [ "$current_branch" = "main" ]; then
