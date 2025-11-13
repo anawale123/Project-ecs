@@ -9,7 +9,8 @@ jobs:
     permissions:
       id-token: write
       contents: read
-
+    env:
+      AWS_ACCOUNT_ID: 111810594106
     
     steps:
       - name: Checkout repo
@@ -28,7 +29,7 @@ jobs:
 
       - name: Build and Publish
         run: |
-          registry="111810594106.dkr.ecr.eu-west-2.amazonaws.com/umami-image"
+          registry="$AWS_ACCOUNT_ID.dkr.ecr.eu-west-2.amazonaws.com/image_umami"
           sha=$(git rev-parse --short HEAD)
           primary_tag="${registry}:${sha}"
 
