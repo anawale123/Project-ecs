@@ -11,7 +11,7 @@ jobs:
       contents: read
 
     env:
-      AWS_ACCOUNT_ID: 175680165464
+      AWS_ACCOUNT_ID: 111810594106
 
     steps:
       - name: Checkout repo
