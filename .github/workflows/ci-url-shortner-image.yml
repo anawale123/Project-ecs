@@ -1,0 +1,48 @@
+name: Automating image push to AWS ECR with oidc
+
+on: [push]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    env:
+      AWS_ACCOUNT_ID: 111810594106
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Configure AWS via OIDC
+        uses: aws-actions/configure-aws-credentials@v2
+        with:  
+          role-to-assume: arn:aws:iam::111810594106:role/ecs-push
+          aws-region: eu-west-2
+
+      - name: Login to Amazon ECR
+        run: |
+          aws ecr get-login-password --region eu-west-2 \
+          | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.eu-west-2.amazonaws.com
+
+      - name: Build and Publish
+        run: |
+          registry="$AWS_ACCOUNT_ID.dkr.ecr.eu-west-2.amazonaws.com/url_shortner"
+          sha=$(git rev-parse --short HEAD)
+          primary_tag="${registry}:${sha}"
+
+         
+              docker build -f umami/url-shortner/Dockerfile -t $primary_tag \url-shortner
+
+         
+          docker push $primary_tag
+
+          current_branch=$(git rev-parse --abbrev-ref HEAD)
+          if [ "$current_branch" = "main" ]; then
+            retention_tag="${registry}:latest"
+            docker tag $primary_tag $retention_tag
+            docker push $retention_tag
+          fi
