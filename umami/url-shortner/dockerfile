@@ -1,0 +1,21 @@
+
+# Base image with Node.js on Alpine Linux
+FROM node:18-alpine
+
+# working directory 
+WORKDIR /app
+
+# copy dependency files first
+COPY package*.json ./
+
+# install dependencies
+RUN npm install --production
+
+# copies the application code
+COPY . .
+
+# expose the port the app listens on
+EXPOSE 3001
+
+#command to start application
+CMD ["node", "server.js"]
