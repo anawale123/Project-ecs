@@ -1,6 +1,6 @@
 const express =require('express');
 const app = express()
-const PORT =process.env.port || 30001;
+const PORT =process.env.port || 3001;
 
 // Mapping table: slug → long URL
 const links = {
