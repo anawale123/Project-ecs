@@ -1,5 +1,5 @@
 
-# Base image with Node.js on Alpine Linux
+# Base image with Node.js 
 FROM node:18-alpine
 
 # working directory 
