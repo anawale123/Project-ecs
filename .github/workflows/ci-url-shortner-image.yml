@@ -35,7 +35,8 @@ jobs:
           primary_tag="${registry}:${sha}"
 
          
-              docker build -f umami/url-shortner/Dockerfile -t $primary_tag \url-shortner
+              docker build -f umami/url-shortner/Dockerfile -t $primary_tag umami/url-shortner
+
 
          
           docker push $primary_tag
