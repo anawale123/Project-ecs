@@ -18,5 +18,6 @@ COPY . .
 EXPOSE 3001
 
 #command to start application
-CMD ["node", "app/url-shortner.js"]
+CMD ["node", "url-shortner.js"]
+
 
