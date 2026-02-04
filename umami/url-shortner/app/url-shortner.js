@@ -1,25 +1,26 @@
 const express = require('express');
 const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
+
 const app = express();
 
 const PORT = process.env.PORT || 3001;
-const BUCKET = process.env.UIID_BUCKET;      // e.g. "website-uiid"
+const BUCKET = process.env.UIID_BUCKET;
 const KEY = process.env.UIID_KEY || "domains.json";
+const REGION = process.env.AWS_REGION;
 
-const s3 = new S3Client({ region: process.env.AWS_REGION });
+const s3 = new S3Client({ region: REGION });
 
-// Cache for domains
 let domains = {};
 
-// Load domains.json from S3
 async function loadDomains() {
-  try {
-    const command = new GetObjectCommand({
-      Bucket: BUCKET,
-      Key: KEY
-    });
+  console.log("loadDomains() called");
+  console.log("ENV:", { BUCKET, KEY, REGION });
 
+  try {
+    const command = new GetObjectCommand({ Bucket: BUCKET, Key: KEY });
+    console.log("Attempting S3 getObject...");
     const response = await s3.send(command);
+
     const body = await response.Body.transformToString();
     domains = JSON.parse(body);
 
@@ -29,13 +30,6 @@ async function loadDomains() {
   }
 }
 
-// Load once at startup
-loadDomains();
-
-// Optional: refresh every 5 minutes
-setInterval(loadDomains, 5 * 60 * 1000);
-
-// Static mapping of features → paths
 const paths = {
   dashboard: "",
   events: "/events",
@@ -54,7 +48,6 @@ const paths = {
   attribution: "/attribution"
 };
 
-// Route: /s/:site/:feature
 app.get('/s/:site/:feature', (req, res) => {
   const { site, feature } = req.params;
 
@@ -69,6 +62,18 @@ app.get('/s/:site/:feature', (req, res) => {
   res.redirect(url);
 });
 
-app.listen(PORT, () => {
-  console.log(`Shortener running on port ${PORT}`);
+async function start() {
+  console.log("Starting shortener service...");
+
+  await loadDomains();
+
+  setInterval(loadDomains, 5 * 60 * 1000);
+
+  app.listen(PORT, () => {
+    console.log(`Shortener running on port ${PORT}`);
+  });
+}
+
+start().catch(err => {
+  console.error("Fatal startup error:", err);
 });
