@@ -2,7 +2,7 @@
 # Base image with Node.js 
 FROM node:18-alpine
 
-# working directory 
+# working directoryy 
 WORKDIR /app
 
 # copy dependency files first
