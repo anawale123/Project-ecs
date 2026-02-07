@@ -1,26 +1,25 @@
 const express = require('express');
 const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
-
 const app = express();
 
 const PORT = process.env.PORT || 3001;
 const BUCKET = process.env.UIID_BUCKET;
 const KEY = process.env.UIID_KEY || "domains.json";
-const REGION = process.env.AWS_REGION;
 
-const s3 = new S3Client({ region: REGION });
+const s3 = new S3Client({ region: process.env.AWS_REGION });
 
+// Cache for domains
 let domains = {};
 
+// Load domains.json from S3
 async function loadDomains() {
-  console.log("loadDomains() called");
-  console.log("ENV:", { BUCKET, KEY, REGION });
-
   try {
-    const command = new GetObjectCommand({ Bucket: BUCKET, Key: KEY });
-    console.log("Attempting S3 getObject...");
-    const response = await s3.send(command);
+    const command = new GetObjectCommand({
+      Bucket: BUCKET,
+      Key: KEY
+    });
 
+    const response = await s3.send(command);
     const body = await response.Body.transformToString();
     domains = JSON.parse(body);
 
@@ -30,6 +29,31 @@ async function loadDomains() {
   }
 }
 
+// Load once at startup
+loadDomains();
+
+// Optional: refresh every 5 minutes
+setInterval(loadDomains, 5 * 60 * 1000);
+
+// ==========================================================
+//          HEALTH CHECK ENDPOINTS (REQUIRED FOR ECS)
+// ==========================================================
+
+// ALB / ECS health check endpoint
+app.get("/health", (req, res) => {
+  res.status(200).send("ok");
+});
+
+// Optional: root endpoint (useful for testing)
+app.get("/", (req, res) => {
+  res.status(200).send("ok");
+});
+
+// ==========================================================
+//                 SHORTENER LOGIC
+// ==========================================================
+
+// Feature → path mapping
 const paths = {
   dashboard: "",
   events: "/events",
@@ -48,13 +72,15 @@ const paths = {
   attribution: "/attribution"
 };
 
-app.get('/s/:site/:feature', (req, res) => {
-  const { site, feature } = req.params;
+// Main redirect route
+app.get('/website/:feature', (req, res) => {
+  const { feature } = req.params;
 
-  const uuid = domains[site];
+  const uuid = domains["site1"]; // default site
   const path = paths[feature];
 
-  if (!uuid || !path) {
+  // FIXED — only fail if path is undefined, not empty string
+  if (!uuid || path === undefined) {
     return res.status(404).send("Not found");
   }
 
@@ -62,18 +88,7 @@ app.get('/s/:site/:feature', (req, res) => {
   res.redirect(url);
 });
 
-async function start() {
-  console.log("Starting shortener service...");
 
-  await loadDomains();
-
-  setInterval(loadDomains, 5 * 60 * 1000);
-
-  app.listen(PORT, () => {
-    console.log(`Shortener running on port ${PORT}`);
-  });
-}
-
-start().catch(err => {
-  console.error("Fatal startup error:", err);
+app.listen(PORT, () => {
+  console.log(`Shortener running on port ${PORT}`);
 });
