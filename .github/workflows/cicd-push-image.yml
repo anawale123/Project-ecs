@@ -34,10 +34,7 @@ jobs:
           sha=$(git rev-parse --short HEAD)
           primary_tag="${registry}:${sha}"
 
-         
-              docker build -f umami\Dockerfile -t $primary_tag umami-image
-
-         
+          docker build -f umami/Dockerfile -t $primary_tag umami-image
           docker push $primary_tag
 
           current_branch=$(git rev-parse --abbrev-ref HEAD)
