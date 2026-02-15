@@ -35,7 +35,17 @@ jobs:
           primary_tag="${registry}:${sha}"
 
           docker build -f umami/Dockerfile -t $primary_tag umami-image
+
+      - name: scan image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${primary_Tag} 
+          severity: CRITICAL,HIGH
+          exit-code: 1
+      - name: push image
+        run:
           docker push $primary_tag
+          
 
           current_branch=$(git rev-parse --abbrev-ref HEAD)
           if [ "$current_branch" = "main" ]; then
