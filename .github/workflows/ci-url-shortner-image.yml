@@ -11,7 +11,7 @@ jobs:
       contents: read
 
     env:
-      AWS_ACCOUNT_ID: 111810594106
+      AWS_ACCOUNT_ID: 175680165464
 
     steps:
       - name: Checkout repo
@@ -20,7 +20,7 @@ jobs:
       - name: Configure AWS via OIDC
         uses: aws-actions/configure-aws-credentials@v2
         with:  
-          role-to-assume: arn:aws:iam::111810594106:role/ecs-push
+          role-to-assume: arn:aws:iam::175680165464:role/github-actions-ecer
           aws-region: eu-west-2
 
       - name: Login to Amazon ECR
@@ -30,29 +30,30 @@ jobs:
 
       - name: Build Docker image
         run: |
-          registry="$AWS_ACCOUNT_ID.dkr.ecr.eu-west-2.amazonaws.com/url_shortner"
+          registry="$AWS_ACCOUNT_ID.dkr.ecr.eu-west-2.amazonaws.com/umami-image"
           sha=$(git rev-parse --short HEAD)
           primary_tag="${registry}:${sha}"
 
-          echo "PRIMARY_TAG=$primary_tag" >> $GITHUB_ENV
+          # export for later steps
+          echo "primary_tag=$primary_tag" >> $GITHUB_ENV
 
-          docker build -f umami/url-shortner/Dockerfile -t $primary_tag umami/url-shortner
+          docker build -f umami/Dockerfile -t $primary_tag umami-image
 
-      - name: Scan image with Trivy
+      - name: Scan image
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ env.PRIMARY_TAG }}
+          image-ref: ${{ env.primary_tag }}
           severity: CRITICAL,HIGH
           exit-code: 1
 
-      - name: Push image to ECR
+      - name: Push image
         run: |
-          docker push $PRIMARY_TAG
+          docker push $primary_tag
 
           current_branch=$(git rev-parse --abbrev-ref HEAD)
           if [ "$current_branch" = "main" ]; then
-            registry="$AWS_ACCOUNT_ID.dkr.ecr.eu-west-2.amazonaws.com/url_shortner"
+            registry="$AWS_ACCOUNT_ID.dkr.ecr.eu-west-2.amazonaws.com/umami-image"
             retention_tag="${registry}:latest"
-            docker tag $PRIMARY_TAG $retention_tag
+            docker tag $primary_tag $retention_tag
             docker push $retention_tag
           fi
