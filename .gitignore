@@ -1,8 +1,10 @@
-# Terraform local files
+# Terraform
 .terraform/
 *.tfstate
 *.tfstate.*
 crash.log
-
-# Terraform provider binaries
-terraform/providers/
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
