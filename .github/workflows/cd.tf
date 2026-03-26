@@ -1,0 +1,34 @@
+name: Deploy via CodeDeploy
+
+on:
+  workflow_run:
+    workflows: [" CODE TRIGGER with OIDC"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    permissions:
+      id-token: write
+      contents: read
+
+    env:
+      AWS_REGION: eu-west-2
+
+    steps:
+      - name: Configure AWS via OIDC
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::111810594106:role/ecs-push
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Trigger CodeDeploy
+        - name: Trigger CodeDeploy
+        run: |
+          aws deploy create-deployment \
+            --application-name my-app \
+            --deployment-group-name my-app-dg \
+            --revision revisionType=AppSpecContent,appSpecContent={content=$(cat .github/workflows/deploy/appspec.yml | jq -Rs .)}
