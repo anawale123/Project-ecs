@@ -44,4 +44,5 @@ jobs:
       - name: terraform apply
         run: |
           cd $WORK_DIR
+          terraform init
           terraform apply --auto-approve
