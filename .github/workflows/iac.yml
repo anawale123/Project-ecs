@@ -23,7 +23,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::111810594106:role/ecs-push
           aws-region: eu-west-2
-
+          
       - name: terraform lint download
         uses: terraform-linters/setup-tflint@v4
         with:
