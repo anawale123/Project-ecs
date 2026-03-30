@@ -1,4 +1,4 @@
-name: Automating image push to AWS ECR with oidc.
+name: Automating image push to AWS ECR with oidc
 
 on: [push]
 
@@ -14,14 +14,13 @@ jobs:
       AWS_ACCOUNT_ID: 111810594106
       WORK_DIR: terraform/infra/envs/prod
 
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
       - name: Configure AWS via OIDC
         uses: aws-actions/configure-aws-credentials@v2
-        with:  
+        with:
           role-to-assume: arn:aws:iam::111810594106:role/ecs-push
           aws-region: eu-west-2
 
@@ -36,12 +35,7 @@ jobs:
           cd $WORK_DIR
           tflint --init
           tflint --run
-
-          if [ "$WORK_DIR" == "-!" ]; then
-            exit 1
-          else
-            echo "$WORK_DIR tflint completed"
-          fi
+          echo "TFLint completed for $WORK_DIR"
 
       - name: terraform apply
         run: |
