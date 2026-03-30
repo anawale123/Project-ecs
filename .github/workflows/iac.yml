@@ -1,4 +1,4 @@
-name: Automating image push to AWS ECR with oidc.
+name: Automating terraform lint and apply
 
 on:
   workflow_dispatch:
