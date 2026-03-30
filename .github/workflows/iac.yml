@@ -12,7 +12,8 @@ jobs:
 
     env:
       AWS_ACCOUNT_ID: 111810594106
-      WORK_DIR: terraform/envs/infra/prod
+      WORK_DIR: terraform/infra/envs/prod
+
 
     steps:
       - name: Checkout repo
