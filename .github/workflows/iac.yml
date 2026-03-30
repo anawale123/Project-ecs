@@ -29,7 +29,7 @@ jobs:
         uses: terraform-linters/setup-tflint@v4
         with:
           tflint_version: v0.52.0
-          cache: true
+         
 
       - name: terraform lint
         run: |
