@@ -3,7 +3,7 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "<TASK_DEFINITION>"
+        TaskDefinition: "arn:aws:ecs:eu-west-2:111810594106:task-definition/umami-service:42"
         LoadBalancerInfo:
           ContainerName: "umami"
           ContainerPort: 3000
