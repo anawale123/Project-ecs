@@ -34,7 +34,7 @@ jobs:
         run: |
           cd $WORK_DIR
           tflint --init
-          tflint --run
+          tflint 
 
           if [ "$WORK_DIR" == "-!" ]; then
             exit 1
