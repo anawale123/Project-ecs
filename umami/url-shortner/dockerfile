@@ -19,8 +19,3 @@ EXPOSE 3001
 
 #command to start application
 CMD ["node", "app/url-shortener.js"]
-<<<<<<< HEAD
-=======
-
-
->>>>>>> cb79dcf145ea0c247904073a64bfe53b52276137
