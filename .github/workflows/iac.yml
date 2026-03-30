@@ -1,7 +1,7 @@
 name: Automating image push to AWS ECR with oidc
 
-on: [push]
-
+on:
+  workflow_dispatch:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
