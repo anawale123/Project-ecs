@@ -41,8 +41,8 @@ resource "aws_db_instance" "umami_rds" {
 
 resource "aws_db_parameter_group" "umami_pg" {
   name        = "umami-pg"
-  family      = "mysql8.0"
-  description = "Parameter group for Umami MySQL"
+  family      = "postgres15"
+  description = "Parameter group for Umami PostgreSQL"
 
   parameters = [
     {
