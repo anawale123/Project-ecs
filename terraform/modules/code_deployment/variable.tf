@@ -5,6 +5,19 @@ variable "codedeploy_role_arn"{
 }
 
 
+# ECS CLUSTER 
+variable "cluster_name" {
+    type = string 
+    description = " ecs cluster umami" 
+}
+
+# ECS SERVICE 
+variable "service_name" {
+    type = string
+    description = " ecs service umami "
+}
+
+
 # ALB LISTENER PROD prod_traffic_route
 variable "alb_listener" {
     type = list(string)
