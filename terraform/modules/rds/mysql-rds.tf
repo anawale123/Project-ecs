@@ -59,8 +59,3 @@ resource "aws_db_instance" "umami_rds" {
 }
 
 
-# RDS SNAPSHOT
-resource "aws_db_snapshot" "db_snapshot" {
-  db_instance_identifier  = aws_db_instance.umami_rds.id
-
-}
