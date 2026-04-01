@@ -39,6 +39,20 @@ resource "aws_db_instance" "umami_rds" {
   }
 }
 
+resource "aws_db_parameter_group" "umami_pg" {
+  name        = "umami-pg"
+  family      = "mysql8.0"
+  description = "Parameter group for Umami MySQL"
+
+  parameters = [
+    {
+      name  = "max_connections"
+      value = "100"
+    }
+  ]
+}
+
+
 # RDS SNAPSHOT
 resource "aws_db_snapshot" "db_snapshot" {
   db_instance_identifier  = aws_db_instance.umami_rds.id
