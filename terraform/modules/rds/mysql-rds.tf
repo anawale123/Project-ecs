@@ -22,8 +22,6 @@ resource "aws_db_instance" "umami_rds" {
   publicly_accessible     = false
   deletion_protection     = true
 
-  parameter_group_name = aws_db_parameter_group.umami_pg.name
-
 # RDS BACK-UP ARGUEMENT INCLUDED WITH RETENTION PERIOD
   maintenance_window      = "Fri:09:00-Fri:09:30"
   backup_retention_period = 7
@@ -38,18 +36,6 @@ resource "aws_db_instance" "umami_rds" {
     Name = "umami-rds"
   }
 }
-
-resource "aws_db_parameter_group" "umami_pg" {
-  name        = "umami-pg"
-  family      = "postgres15"
-  description = "Parameter group for Umami PostgreSQL"
-
-  parameter {
-    name  = "max_connections"
-    value = "100"
-  }
-}
-
 
 
 # RDS SNAPSHOT
