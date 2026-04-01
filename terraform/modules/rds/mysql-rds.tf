@@ -40,6 +40,9 @@ resource "aws_db_instance" "umami_rds" {
   vpc_security_group_ids  = [var.rds_sg]
   publicly_accessible     = false
   deletion_protection     = true
+  skip_final_snapshot       = false
+  final_snapshot_identifier = "db_snapshot"
+
 
 # RDS BACK-UP ARGUEMENT INCLUDED WITH RETENTION PERIOD
   maintenance_window      = "Fri:09:00-Fri:09:30"
@@ -61,4 +64,5 @@ resource "aws_db_instance" "umami_rds" {
 resource "aws_db_snapshot" "db_snapshot" {
   db_instance_identifier  = aws_db_instance.umami_rds.id
   db_snapshot_identifier  = "umami-snapshot-20251215"
+
 }
