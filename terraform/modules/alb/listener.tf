@@ -15,7 +15,7 @@ resource "aws_lb_listener" "https" {
 
 # Listener rule: forward /website* and health requests to the shortener target group
 resource "aws_lb_listener_rule" "url_shortner_rule" {
-  load_balancer_arn = aws_lb.alb_main_1.arn
+  
   listener_arn = aws_lb_listener.https.arn
   priority     = 10
 
