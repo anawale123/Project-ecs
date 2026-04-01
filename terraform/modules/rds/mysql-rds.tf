@@ -1,4 +1,12 @@
 
+resource "aws_db_subnet_group" "umami_db_subnet_group" {
+  name       = "umami-db-subnets"
+  subnet_ids = var.private_rds
+
+  tags = {
+    Name = "umami-db-subnets"
+  }
+}
 
 # RDS INSTANCE CONFIGURATION BLOCK
 resource "aws_db_instance" "umami_rds" {
