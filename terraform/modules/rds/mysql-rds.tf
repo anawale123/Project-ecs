@@ -7,9 +7,28 @@ resource "aws_db_subnet_group" "umami_db_subnet_group" {
     Name = "umami-db-subnets"
   }
 }
+# DB CREDENTIALS
+resource "aws_secretsmanager_secret" "db" {
+  name = "umami-db-credentials"
+}
+data "aws_secretsmanager_secret" "db" {
+  name = aws_secretsmanager_secret.db.name
+}
+
+data "aws_secretsmanager_secret_version" "db" {
+  secret_id = data.aws_secretsmanager_secret.db.id
+}
+
+locals {
+  db_creds = jsondecode(data.aws_secretsmanager_secret_version.db.secret_string)
+}
+
+
 
 # RDS INSTANCE CONFIGURATION BLOCK
 resource "aws_db_instance" "umami_rds" {
+  username = local.db_creds.username
+  password = local.db_creds.password
   identifier              = "umami-db"
   engine                  = "postgres"
   engine_version          = "15.13"
