@@ -7,6 +7,8 @@ resource "aws_ecs_service" "umami-service" {
   desired_count   = 2
   launch_type      = "FARGATE"
 
+
+
 # NETWORK CONFIGURATION 
   network_configuration {
     subnets          = var.private_subnets
@@ -14,6 +16,7 @@ resource "aws_ecs_service" "umami-service" {
     security_groups = [var.ecs_sg_id]
 
   }
+
 # LOAD BALANCER CONFIGURATION
   load_balancer {
     target_group_arn = var.target_group_arn
@@ -25,7 +28,9 @@ resource "aws_ecs_service" "umami-service" {
   depends_on = [
     aws_ecs_task_definition.umami_task_def
   ]
-
-
+# CODE DEPLOY 
+deployment_controller {
+    type = "CODE_DEPLOY"
+  }
 
 }
