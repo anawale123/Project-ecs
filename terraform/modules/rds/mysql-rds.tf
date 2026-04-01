@@ -1,20 +1,3 @@
-# RDS SUBNET GROUP 
-resource "aws_db_subnet_group"  "umami_db_subnet_group" {
-  name       = "main"
-  subnet_ids  = var.private_rds
- 
-
-  tags = {
-    Name = "DB subnet group"
-  }
-}
-
-resource "aws_db_parameter_group" "umami_pg" {
-  name   = "umami-pg"
-  family = "postgres15"
-
-  
-}
 
 
 # RDS INSTANCE CONFIGURATION BLOCK
