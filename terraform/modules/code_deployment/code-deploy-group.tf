@@ -3,6 +3,11 @@ resource "aws_codedeploy_deployment_group" "ecs" {
   deployment_group_name = "ecs-blue-green"
   service_role_arn      = var.codedeploy_role_arn
 
+  ecs_service {
+  cluster_name = var.cluster_name
+  service_name = var.service_name
+  }
+
   deployment_style {
     deployment_type   = "BLUE_GREEN"
     deployment_option = "WITH_TRAFFIC_CONTROL"
