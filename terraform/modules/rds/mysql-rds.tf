@@ -44,13 +44,12 @@ resource "aws_db_parameter_group" "umami_pg" {
   family      = "postgres15"
   description = "Parameter group for Umami PostgreSQL"
 
-  parameters = [
-    {
-      name  = "max_connections"
-      value = "100"
-    }
-  ]
+  parameter {
+    name  = "max_connections"
+    value = "100"
+  }
 }
+
 
 
 # RDS SNAPSHOT
