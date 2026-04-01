@@ -4,8 +4,8 @@ resource "aws_codedeploy_deployment_group" "ecs" {
   service_role_arn      = var.codedeploy_role_arn
 
   ecs_service {
-  cluster_name = var.cluster_name
-  service_name = var.service_name
+    cluster_name = var.cluster_name
+    service_name = var.service_name
   }
 
   deployment_style {
@@ -14,6 +14,11 @@ resource "aws_codedeploy_deployment_group" "ecs" {
   }
 
   blue_green_deployment_config {
+    deployment_ready_option {
+      action_on_timeout    = "CONTINUE_DEPLOYMENT"
+      wait_time_in_minutes = 0
+    }
+
     terminate_blue_instances_on_deployment_success {
       action                           = "TERMINATE"
       termination_wait_time_in_minutes = 5
