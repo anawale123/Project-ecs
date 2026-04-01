@@ -40,7 +40,7 @@ resource "aws_db_instance" "umami_rds" {
   vpc_security_group_ids  = [var.rds_sg]
   publicly_accessible     = false
   deletion_protection     = true
-  "
+  
 
 
 # RDS BACK-UP ARGUEMENT INCLUDED WITH RETENTION PERIOD
@@ -62,6 +62,5 @@ resource "aws_db_instance" "umami_rds" {
 # RDS SNAPSHOT
 resource "aws_db_snapshot" "db_snapshot" {
   db_instance_identifier  = aws_db_instance.umami_rds.id
-  db_snapshot_identifier  = "umami-snapshot-20251215"
 
 }
