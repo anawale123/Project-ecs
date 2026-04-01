@@ -39,8 +39,8 @@ resource "aws_db_instance" "umami_rds" {
   db_subnet_group_name    = aws_db_subnet_group.umami_db_subnet_group.name
   vpc_security_group_ids  = [var.rds_sg]
   publicly_accessible     = false
-  deletion_protection     = true
-  skip_final_snapshot = true
+  deletion_protection     = false
+  skip_final_snapshot     = true
 
   
 
