@@ -40,8 +40,7 @@ resource "aws_db_instance" "umami_rds" {
   vpc_security_group_ids  = [var.rds_sg]
   publicly_accessible     = false
   deletion_protection     = true
-  skip_final_snapshot       = false
-  final_snapshot_identifier = "umami-final-snapshot"
+  "
 
 
 # RDS BACK-UP ARGUEMENT INCLUDED WITH RETENTION PERIOD
