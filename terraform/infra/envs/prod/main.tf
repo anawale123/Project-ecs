@@ -104,15 +104,15 @@ module "code_deployment" {
   alb_listener = [module.alb.alb_listener]
   blue_tg      = module.alb.blue_tg
   green_tg     = module.alb.green_tg
-  cluster_name        = module.ecs.cluster.name
-  service_name        = module.ecs.service.name
+  cluster_name        = module.ecs.cluster
+  service_name        = module.ecs.service
 }
 
 # ATS AUTO SCALING ECS
 
 module "auto-scaling" {
     source = "../../../modules/auto_scaling"
-    cluster        = module.ecs.cluster.name  
-    service        = module.ecs.service.name
+    cluster        = module.ecs.cluster
+    service        = module.ecs.service
 
 }
