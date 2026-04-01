@@ -24,14 +24,11 @@ resource "aws_lb_listener_rule" "url_shortner_rule" {
   }
 
   condition {
-    path_pattern {
-      values = ["/website *"]
-    }
-  }
-
-  condition {
-    path_pattern {
-      values = ["/health"]
+  path_pattern {
+    values = [
+      "/website*",
+      "/health"
+      ]
     }
   }
 
