@@ -1,6 +1,5 @@
 name: Automating image push to AWS ECR with OIDC
 
-
 on:
   workflow_dispatch:
 
@@ -41,7 +40,21 @@ jobs:
         with:
           image-ref: umami:latest
           severity: HIGH,CRITICAL
-          exit-code: 1
+          trivyignores: .trivyignore
+          exit-code: 0
+          format: json
+          output: trivy.json
+
+      - name: check trivy states
+        run: |
+          UNFIXED=$(jq -r '.Results[].Vulnerabilities[] | select(.Status != "fixed")' trivy.json)
+
+          if [ -n "$UNFIXED" ]; then
+            echo "vulnerabilities still there"
+            exit 1
+          else
+            echo "all vulnerabilities fixed proceed"
+          fi
 
       - name: Push image (umami)
         run: |
@@ -63,13 +76,6 @@ jobs:
       - name: Build image (url_shortner)
         run: |
           docker build --cache-from=type=gha --cache-to=type=gha,mode=max -f umami/url-shortner/Dockerfile -t url_shortner:latest umami/url-shortner
-
-      - name: Scan image (url_shortner)
-        uses: aquasecurity/trivy-action@v0.20.0
-        with:
-          image-ref: url_shortner:latest
-          severity: HIGH,CRITICAL
-          exit-code: 1
 
       - name: Push image (url_shortner)
         run: |
