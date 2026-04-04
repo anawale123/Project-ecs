@@ -14,7 +14,7 @@ resource "aws_ecs_task_definition" "umami_task_def" {
   container_definitions = jsonencode([
     {
       name      = "umami"
-      image     = "1111810594106.dkr.ecr.eu-west-2.amazonaws.com/image_umami@sha256:2e83b25f2453ca6dfc707f24990c817edd0d86bd9b5ea78a708c116e98c58a26"
+      image     = "111810594106.dkr.ecr.eu-west-2.amazonaws.com/image_umami:latest"
       cpu       = 256
       memory    = 512
       essential = true
