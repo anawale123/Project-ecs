@@ -46,14 +46,9 @@ jobs:
           args: --ignorefile ./.trivyignore
 
       - name: check trivy states
-        run: |  
-         UNFIXED=$(jq -r '.Results[].Vulnerabilities? // [] | map(select(.Status != "fixed")) | .[]?' trivy.json)
-
-
-
-          if [ -n "$UNFIXED" ]; then
+        run: |
+          if grep -q '"Status": "unfixed"' trivy.json; then
             echo "vulnerabilities still there"
-            cat trivy.json | jq
             exit 1
           else
             echo "all vulnerabilities fixed proceed"
