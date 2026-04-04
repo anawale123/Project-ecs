@@ -40,13 +40,13 @@ jobs:
         with:
           image-ref: umami:latest
           severity: HIGH,CRITICAL
-          trivyignores: .trivyignore
           exit-code: 0
           format: json
           output: trivy.json
+          args: --ignorefile ./.trivyignore
 
       - name: check trivy states
-        run: |
+        run: |  
           UNFIXED=$(jq -r '.Results[].Vulnerabilities[] | select(.Status != "fixed")' trivy.json)
 
           if [ -n "$UNFIXED" ]; then
