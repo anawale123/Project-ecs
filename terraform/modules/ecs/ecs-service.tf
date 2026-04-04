@@ -28,9 +28,6 @@ resource "aws_ecs_service" "umami-service" {
   depends_on = [
     aws_ecs_task_definition.umami_task_def
   ]
-# CODE DEPLOY 
-deployment_controller {
-    type = "CODE_DEPLOY"
-  }
+
 
 }
