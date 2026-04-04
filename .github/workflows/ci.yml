@@ -47,7 +47,9 @@ jobs:
 
       - name: check trivy states
         run: |  
-          UNFIXED=$(jq -r '.Results[].Vulnerabilities[] | select(.Status != "fixed")' trivy.json)
+         UNFIXED=$(jq -r '.Results[].Vulnerabilities? // [] | map(select(.Status != "fixed")) | .[]?' trivy.json)
+
+
 
           if [ -n "$UNFIXED" ]; then
             echo "vulnerabilities still there"
