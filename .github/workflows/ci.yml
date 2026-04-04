@@ -51,6 +51,7 @@ jobs:
 
           if [ -n "$UNFIXED" ]; then
             echo "vulnerabilities still there"
+            cat trivy.json | jq
             exit 1
           else
             echo "all vulnerabilities fixed proceed"
