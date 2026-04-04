@@ -8,9 +8,7 @@ resource "aws_db_subnet_group" "umami_db_subnet_group" {
   }
 }
 # DB CREDENTIALS
-resource "aws_secretsmanager_secret" "db" {
-  name = "umami-db-credentials"
-}
+
 data "aws_secretsmanager_secret" "db" {
   name = aws_secretsmanager_secret.db.name
 }
