@@ -10,7 +10,7 @@ resource "aws_ecs_task_definition" "umami_task_def" {
   task_role_arn = var.secret_db_task_role_arn
 
 
-# CONFIGURATION BUILT UPON docker IMAGE, TO DEFINE IMAGE AND RUN IT AS A TASK, MIRROR DOCKER IMAGE AND OPTIMIZING COMPUTE IN ORDER TO CONTAINER TO SUCCESSFULLY RUN
+# CONFIGURATION BUILT UPON docker I]MAGE, TO DEFINE IMAGE AND RUN IT AS A TASK, MIRROR DOCKER IMAGE AND OPTIMIZING COMPUTE IN ORDER TO CONTAINER TO SUCCESSFULLY RUN
   container_definitions = jsonencode([
     {
       name      = "umami"
