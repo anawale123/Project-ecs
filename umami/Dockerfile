@@ -38,6 +38,8 @@ RUN set -x \
 
 
 ADD https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem /app/rds-ca.pem
+RUN chmod 644 /app/rds-ca.pem
+
 
 # Copy package files first
 COPY package.json pnpm-lock.yaml ./
