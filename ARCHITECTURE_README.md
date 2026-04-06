@@ -188,4 +188,4 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 | rds                | RDS PostgreSQL instance, subnet group, parameter group, and snapshot        |
 | waf                | Web ACL, managed rule sets, and ALB association                             |
 
-Each module is self-contained and follows the DRY principle — keeping the infrastructure consistent and organised, making it straightforward to promote changes across environments.
+Each module is self-contained and follows the DRY principle, keeping the infrastructure consistent and organised, making it straightforward to promote changes across environments.
