@@ -67,13 +67,6 @@ Production-equivalent setup built on top of the dev stage. The aim is to catch a
 | ALB Listener Rules| Routes /website* and /health to URL shortener |
 | IAM Task Role     | S3 access and Secrets Manager permissions     |
 
-### Pipeline Steps
-
-1. Deploy to staging environment  
-2. Run integration and end-to-end tests  
-3. Verify CloudWatch dashboards and alarms  
-4. Manual approval gate — sign-off required before prod  
-
 ---
 
 ## Phase 3 — Production
