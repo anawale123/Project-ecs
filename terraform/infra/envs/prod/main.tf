@@ -73,21 +73,6 @@ module "ecs" {
   secret_db_task_role_arn = module.iam.secret_db_task_role_arn
 }
 
-# URL Shortener ECS service
-module "url_shortner_ecs" {
-  source = "../../../modules/url_shortner_ecs"
-
-  ecs_cluster      = module.ecs.ecs_cluster_name
-  alb_target_group_url_shortner_arn = module.alb.alb_target_group_url_shortner_arn
-  vpc_id           = module.networking.vpc_id
-  private_subnets  = module.networking.private_subnets
-  ecs_sg_id        = module.networking.ecs_sg_id
-  image_pull_arn   = module.iam.image_pull_arn
-  bucket_name      = module.s3_bucket.bucket_name
-  ecs_task_role_arn = module.iam.ecs_task_role_arn
-
-  app_url = "https://umami-analytics.co.uk"
-}
 
 # WAF 
 module "waf" {

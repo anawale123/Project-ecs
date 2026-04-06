@@ -5,11 +5,6 @@ output "alb_target_group_arn" {
   value       = aws_lb_target_group.alb_tg_http.arn
 }
 
-#ALB URL-Shortener tg arn 
-output "alb_target_group_url_shortner_arn" {
-  description = " Url shortner target group"
-  value       = aws_lb_target_group.alb_url_shortner_tg.arn
-}
 
 # ALB NAME
 output "alb_name" {

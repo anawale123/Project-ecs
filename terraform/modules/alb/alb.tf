@@ -1,6 +1,6 @@
 
 # MAIN ALB 
-resource "aws_lb" "alb_main_1" {
+resource "aws_lb" "alb_main" {
   name               = "alb-main"
   internal           = false
   load_balancer_type = "application"

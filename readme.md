@@ -22,7 +22,7 @@ End-to-end migration of a self-hosted web analytics platform onto AWS cloud infr
 
 ---
 
-## Services
+## Service
 
 ### Umami — Web Analytics
 
@@ -37,20 +37,6 @@ Source: https://github.com/umami-software/umami
 | ECS Service    | Fargate service running the Umami application on port 3000              |
 | ECS Task       | credentials injected from Secrets Manager at startup                    |
 | RDS PostgreSQL | Dedicated PostgreSQL 15 instance in private subnets stores all analytics data |
-
----
-
-### URL Shortener — Microservice
-
-A Node.js microservice that operates independently alongside Umami. It receives long website UUIDs, stores them in S3, and returns a shortened URL. Umami uses these shortened URLs for tracking links embedded in analytics events.
-
-#### Resource Details
-
-| Resource     | Details                                                                 |
-|--------------|-------------------------------------------------------------------------|
-| ECS Service  | Fargate service running the URL shortener on port 3001                  |
-| ECS Task     | runs independently of the Umami service                                 |
-| S3 Bucket    | Stores long website UUIDs with versioning enabled                       |
 
 ---
 

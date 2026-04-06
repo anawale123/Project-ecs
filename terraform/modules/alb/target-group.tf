@@ -1,13 +1,13 @@
 # MAIN ALB TARGET GROUP
 resource "aws_lb_target_group" "alb_tg_http" {
-  name        = "alb-tg-main"
+ name        = "umami-tg"
   port        = 3000
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
   target_type = "ip"
 
   health_check {
-    path                = "/"
+    path                = "/api/heartbeat"
     protocol            = "HTTP"
     interval            = 30
     timeout             = 5
@@ -17,24 +17,6 @@ resource "aws_lb_target_group" "alb_tg_http" {
   }
 }
 
-# URL SHORTNER TARGET GROUP
-resource "aws_lb_target_group" "alb_url_shortner_tg" {
-  name        = "alb-tg-url-shortner"
-  port        = 3001
-  protocol    = "HTTP"
-  vpc_id      = var.vpc_id
-  target_type = "ip"
-
-  health_check {
-    path                = "/health"
-    protocol            = "HTTP"
-    interval            = 30
-    timeout             = 5
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    matcher             = "200-399"
-  }
-}
 
 # BLUE TARGET GROUP
 resource "aws_lb_target_group" "blue_tg" {

@@ -13,26 +13,7 @@ resource "aws_lb_listener" "https" {
   }
 }
 
-# Listener rule: forward /website* and health requests to the shortener target group
-resource "aws_lb_listener_rule" "url_shortner_rule" {
-  
-  listener_arn = aws_lb_listener.https.arn
-  priority     = 10
 
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.alb_url_shortner_tg.arn
-  }
 
-  condition {
-  path_pattern {
-    values = [
-      "/website*",
-      "/health"
-      ]
-    }
-  }
-
-}
 
 

@@ -63,9 +63,7 @@ Production-equivalent setup built on top of the dev stage. The aim is to catch a
 |-------------------|-----------------------------------------------|
 | ACM Certificate   | HTTPS on staging.umami-analytics.co.uk        |
 | WAF               | AWS managed rule set attached to ALB          |
-| S3 Bucket         | UUID storage                                  |
 | Secrets Manager   | DB credentials with KMS encryption            |
-| URL Shortener ECS | Second service on port 3001                   |
 | ALB Listener Rules| Routes /website* and /health to URL shortener |
 | IAM Task Role     | S3 access and Secrets Manager permissions     |
 
@@ -122,7 +120,5 @@ Full production setup with zero-downtime deployments, autoscaling and complete o
 | iam               | Task execution role, task role, CodeDeploy role and policies |
 | cloudwatch        | Dashboard, log groups and alarms across ECS, ALB and RDS    |
 | waf               | Web ACL, managed rule set and ALB association                |
-| s3_bucket         | UUID storage bucket and Terraform state bucket               |
-| url_shortener_ecs | URL shortener ECS service and task definition                |
 | code_deployment   | CodeDeploy application and blue/green deployment group       |
 | auto_scaling      | ECS service autoscaling policies and CloudWatch alarms       |
