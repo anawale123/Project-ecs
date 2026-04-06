@@ -152,11 +152,11 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 
 | Component   | Decision              | Reason                                      |
 |------------|----------------------|--------------------------------------------|
-| ECS         | Serverless Fargate    | No EC2 maintenance — pay per use            |
+| ECS         | Serverless Fargate    | No EC2 maintenance, pay per use            |
 | RDS         | db.t3.micro           | Right-sized for current workload            |
 | Autoscaling | 2 to 6 tasks          | Scales only under genuine demand            |
 | NAT Gateway | Single NAT            | Eliminates cross-AZ duplication cost        |
-| CloudWatch  | Targeted alarms only  | Reduces unnecessary log ingestion cost      |
+| CloudWatch  | Targeted alarms only  | Reduces unnecessary log  cost               |
 | Backups     | 7-day retention       | Balanced recovery window vs storage spend   |
 | WAF         | Managed rule sets     | No custom rule authoring overhead           |
 | S3          | Limited versioning    | Controls storage growth overhead            |
@@ -186,8 +186,6 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 | iam                | Task execution role, task role, CodeDeploy role, and all associated policies|
 | networking         | VPC, subnets, route tables, security groups, NAT Gateway, and Internet Gateway |
 | rds                | RDS PostgreSQL instance, subnet group, parameter group, and snapshot        |
-| s3_bucket          | UUID storage bucket and Terraform state bucket                              |
-| url_shortener_ecs  | URL shortener ECS service and task definition                               |
 | waf                | Web ACL, managed rule sets, and ALB association                             |
 
 Each module is self-contained and follows the DRY principle — keeping the infrastructure consistent and organised, making it straightforward to promote changes across environments.
