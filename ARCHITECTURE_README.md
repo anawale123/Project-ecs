@@ -119,7 +119,7 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 | ALB      | 4xx & 5xx Errors        | Count of client and server errors                |
 | ALB      | Request Count           | Total number of requests hitting the ALB         |
 | ECS      | CPU Utilization         | Average CPU usage for the ECS service            |
-| ECS      | Memory Utilization      | Average memory usage for the ECS service         |
+| ECS      | Memory Utilisation      | Average memory usage for the ECS service         |
 | ECS      | Running Task Count      | Number of running tasks in the ECS service       |
 | WAF      | Blocked Requests        | Requests blocked by the WAF WebACL               |
 
