@@ -21,8 +21,8 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # MUST have this
-      
+        uses: actions/checkout@v4
+
       - name: Configure AWS via OIDC
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -32,6 +32,7 @@ jobs:
       - name: Trigger CodeDeploy
         run: |
           aws deploy create-deployment \
-            --application-name my-app \
-            --deployment-group-name my-app-dg \
-            --revision revisionType=AppSpecContent,appSpecContent={content=$(cat .github/workflows/deploy/appspec.yml | jq -Rs .)}
+            --application-name ecs_code_deployment \
+            --deployment-group-name ecs-blue-green \
+            --region eu-west-2 \
+            --revision revisionType=AppSpecContent,appSpecContent="{\"content\": $(jq -Rs . < appspec.yml)}"
