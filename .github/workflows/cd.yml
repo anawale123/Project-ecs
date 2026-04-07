@@ -26,7 +26,6 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Trigger CodeDeploy
-        - name: Trigger CodeDeploy
         run: |
           aws deploy create-deployment \
             --application-name my-app \

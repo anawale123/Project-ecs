@@ -69,24 +69,3 @@ jobs:
             docker tag umami:latest $latest_tag
             docker push $latest_tag
           fi
-
-      # URL SHORTENER IMAGE
-      - name: Build image (url_shortner)
-        run: |
-          docker build --cache-from=type=gha --cache-to=type=gha,mode=max -f umami/url-shortner/Dockerfile -t url_shortner:latest umami/url-shortner
-
-      - name: Push image (url_shortner)
-        run: |
-          registry="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/url_shortner"
-          sha=$(git rev-parse --short HEAD)
-          primary_tag="${registry}:${sha}"
-
-          docker tag url_shortner:latest $primary_tag
-          docker push $primary_tag
-
-          current_branch=$(git rev-parse --abbrev-ref HEAD)
-          if [ "$current_branch" = "main" ]; then
-            latest_tag="${registry}:latest"
-            docker tag url_shortner:latest $latest_tag
-            docker push $latest_tag
-          fi
