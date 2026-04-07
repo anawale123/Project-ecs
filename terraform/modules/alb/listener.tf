@@ -1,6 +1,6 @@
 # HTTPS listener: terminate TLS and forward to default target group (Umami)
 resource "aws_lb_listener" "https" {
-  load_balancer_arn = aws_lb.alb_main_1.arn
+  load_balancer_arn = aws_lb.alb_main.arn
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
