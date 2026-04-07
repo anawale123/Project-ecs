@@ -90,21 +90,4 @@ resource "aws_iam_role_policy_attachment" "ecs_task_secrets_attach" {
 
 
 
-# ECS TASK READING UIID WEBSITES STORED ON S3 BUCKET 
-resource "aws_iam_role_policy" "ecs_read_uiid" {
-  role = aws_iam_role.ecs_task_role.id
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = [
-          "s3:GetObject"
-        ]
-        Resource = "${var.bucket_arn}/*"
-      }
-    ]
-  })
-}
 
