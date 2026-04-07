@@ -20,7 +20,7 @@ module "networking" {
 # IAM
 module "iam" {
   source = "../../../modules/iam"
-  bucket_arn = module.s3_bucket.bucket_arn
+
 }
 
 # RDS
