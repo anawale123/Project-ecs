@@ -16,10 +16,6 @@ module "networking" {
   source = "../../../modules/networking"
 }
 
-# S3 BUCKET
-module "s3_bucket" {
-  source = "../../../modules/s3_bucket"
-}
 
 # IAM
 module "iam" {
