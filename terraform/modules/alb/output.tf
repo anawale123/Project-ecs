@@ -9,13 +9,13 @@ output "alb_target_group_arn" {
 # ALB NAME
 output "alb_name" {
   description = " Url shortner target group"
-  value       = aws_lb.alb_main_1.name
+  value       = aws_lb.alb_main.name
 }
 
 # ALB NAME
 output "alb_arn" {
   description = " alb arn reference output variable"
-  value       = aws_lb.alb_main_1.arn
+  value       = aws_lb.alb_main.arn
 }
 
 
