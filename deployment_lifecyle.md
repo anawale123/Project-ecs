@@ -10,7 +10,7 @@ Repository: https://github.com/umami-software/umami
 
 ## Phases
 
-![Deployment Phases](deployment_phases.png)
+![Deployment Phases](assests/deployment_phases.png)
 
 | Phase | Environment | Goal                                           |
 |-------|------------|------------------------------------------------|
