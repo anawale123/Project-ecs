@@ -31,8 +31,10 @@ jobs:
 
       - name: Trigger CodeDeploy
         run: |
+          CONTENT=$(jq -Rs . < .github/deploy/appsec.yml)
+
           aws deploy create-deployment \
             --application-name ecs_code_deployment \
             --deployment-group-name ecs-blue-green \
             --region eu-west-2 \
-            --revision revisionType=AppSpecContent,appSpecContent="{\"content\": $(jq -Rs . < .github/deploy/appsec.yml)}"
+            --revision revisionType=AppSpecContent,appSpecContent='{"content": '"$CONTENT"'}'
