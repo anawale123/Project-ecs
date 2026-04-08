@@ -56,7 +56,7 @@ Extra two documents are accompanied with this project, covering the full deliver
 
 Umami application running on  private ECS Fargate subnet behind an internet-facing ALB.
 
-![Application Running](assets/application-running.gif)
+![Application Running](assests/application-running.gif)
 
 ---
 
@@ -66,19 +66,19 @@ Umami application running on  private ECS Fargate subnet behind an internet-faci
 
 Created a workflow that builds the Docker image, scans for vulnerabilities and pushes to ECR.
 
-![CI Workflow](assets/ci_yml.png)
+![CI Workflow](assests/ci_yml.png)
 
 ### Infrastructure as Code
 
 Infrastructure pipeline using `iac.yml` to provision all AWS infrastructure via Terraform.
 
-![IaC Workflow](assets/iac_yml.png)
+![IaC Workflow](assests/iac_yml.png)
 
 ### Code Deployment Trigger
 
 Pipeline to trigger CodeDeploy for blue/green deployments.
 
-![CodeDeploy Workflow](assets/cd_yml.png)
+![CodeDeploy Workflow](assests/cd_yml.png)
 
 ---
 
@@ -86,7 +86,7 @@ Pipeline to trigger CodeDeploy for blue/green deployments.
 
 Successfully executed zero-downtime deployment via blue/green deployment on AWS CodeDeploy.
 
-![CodeDeploy Live](assets/cd.png)
+![CodeDeploy Live](assests/cd.png)
 
 ---
 
