@@ -6,9 +6,9 @@ A full-stack monolithic web application built with Next.js for the frontend, run
 The infrastructure is designed to be production-ready with high availability, strong security practices, and full observability across all components.
 ## Architecture Diagram
 
+visual representation of the architecture deployed, showcasing dev pipelines, user interactions and components built and provision on terraform 
 
-
-![Architecture Diagram](assets/ecs.drawio.png)
+![Architecture Diagram](assests/ecs.drawio.png)
 
 
 ---
