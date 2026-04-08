@@ -1,4 +1,4 @@
-# HTTPS listener: terminate TLS and forward to Umami
+# HTTPS listener terminate TLS and forward to Umami
 resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.alb_main.arn
   port              = 443
@@ -8,7 +8,7 @@ resource "aws_lb_listener" "https" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.alb_tg_http.arn
+    target_group_arn = aws_lb_target_group.blue_tg.arn
   }
 }
 

@@ -18,7 +18,7 @@ variable "ecs_sg_id" {
 }
 
 # TARGET GROUP VARIABLE
-variable "target_group_arn" {
+variable "blue_tg_arn" {
   description = "Target group for ALB"
   type        = string
 }

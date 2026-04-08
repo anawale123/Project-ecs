@@ -62,7 +62,7 @@ module "ecs" {
   vpc_id                  = module.networking.vpc_id
   private_subnets         = module.networking.private_subnets
   ecs_sg_id               = module.networking.ecs_sg_id
-  target_group_arn        = module.alb.alb_target_group_arn
+  blue_tg_arn             = module.alb.blue_tg_arn
   image_pull_arn          = module.iam.image_pull_arn
   cloudwatch              = module.cloudwatch.cloudwatch
   secret_db_arn           = module.iam.secret_db_arn

@@ -1,8 +1,8 @@
 # ALB TG ARN
 
-output "alb_target_group_arn" {
+output "blue_tg_arn" {
   description = "  Main app target group"
-  value       = aws_lb_target_group.alb_tg_http.arn
+  value       = aws_lb_target_group.blue_tg.arn
 }
 
 
@@ -28,11 +28,11 @@ output "alb_listener" {
 #ALB BLUE TG
 output "blue_tg" {
   description = "blue target code deployment" 
-  value       = aws_lb_target_group.blue_tg.arn
+  value       = aws_lb_target_group.blue_tg.name
 }
 
 # ALB GREEN TG
 output "green_tg" {
   description = "blue target code deployment" 
-  value       = aws_lb_target_group.green_tg.arn
+  value       = aws_lb_target_group.green_tg.name
 }

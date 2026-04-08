@@ -20,7 +20,7 @@ resource "aws_ecs_service" "umami-service" {
 
   # LOAD BALANCER CONFIGURATION
   load_balancer {
-    target_group_arn = var.target_group_arn
+    target_group_arn = var.blue_tg_arn
     container_name   = "umami"
     container_port   = 3000
   }
