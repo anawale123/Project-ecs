@@ -35,4 +35,4 @@ jobs:
             --application-name ecs_code_deployment \
             --deployment-group-name ecs-blue-green \
             --region eu-west-2 \
-            --revision revisionType=AppSpecContent,appSpecContent="{\"content\": $(jq -Rs . < appspec.yml)}"
+            --revision revisionType=AppSpecContent,appSpecContent="{\"content\": $(jq -Rs . < .github/deploy/appsec.yml)}"
