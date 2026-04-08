@@ -4,6 +4,12 @@
 A full-stack monolithic web application built with Next.js for the frontend, running on the Node.js runtime, using Express as the backend server and Prisma as the ORM for PostgreSQL. The application is containerised locally with Docker Compose and deployed onto AWS ECS Fargate, with the VPC built from scratch using Terraform. A CI/CD pipeline handles building and pushing Docker images to ECR and triggering deployments to ECS.
 
 The infrastructure is designed to be production-ready with high availability, strong security practices, and full observability across all components.
+## Architecture Diagram
+
+
+
+![Architecture Diagram](assets/ecs.drawio.png)
+
 
 ---
 
@@ -42,21 +48,21 @@ The infrastructure is designed to be production-ready with high availability, st
 | Service        | Port | CPU | Memory  | Desired Count |
 |---------------|------|-----|--------|--------------|
 | Umami          | 3000 | 256 | 512 MB  | 2             |
-| URL Shortener  | 3001 | 256 | 512 MB  | 2             |
+
 
 ### Load Balancing — ALB Listener Rules
 
 | Rule | Path Pattern | Target Group      |
 |-----|-------------|------------------|
-| A    | /website*    | URL Shortener TG  |
-| B    | /health      | URL Shortener TG  |
+| A    | /*           | UMAMI, TG         |
+| B    | /health      | UMAMU,TG          |
 
 ### Target Groups
 
 | Target Group    | Port | Protocol | Health Check | Valid Codes |
 |----------------|------|---------|-------------|------------|
-| Umami (main)    | 3000 | HTTP     | /            | 200–399     |
-| URL Shortener   | 3001 | HTTP     | /health      | 200–399     |
+| Umami (main)    | 3000 | HTTP     | /*           | 200–399     |
+| Umami (health)  | 3000 | HTTP     | /health      | 200–399     |
 | Blue            | 3000 | HTTP     | Default      | —           |
 | Green           | 3000 | HTTP     | Default      | —           |
 
@@ -111,19 +117,12 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 
 ## Observability
 
-### Cloudwatch dashboard 
+### cloudwatch
+## cloudwatch dashboard 
 
-| Component | Metric        | Description                                      |
-|----------|-------------------------|--------------------------------------------------|
-| ALB      | Target Response Time    | Average latency from ALB to ECS targets          |
-| ALB      | 4xx & 5xx Errors        | Count of client and server errors                |
-| ALB      | Request Count           | Total number of requests hitting the ALB         |
-| ECS      | CPU Utilization         | Average CPU usage for the ECS service            |
-| ECS      | Memory Utilisation      | Average memory usage for the ECS service         |
-| ECS      | Running Task Count      | Number of running tasks in the ECS service       |
-| WAF      | Blocked Requests        | Requests blocked by the WAF WebACL               |
 
-### CloudWatch Dashboard
+## CloudWatch Dashboard
+## CloudWatch Dashboard
 
 | Metric | Stat | Period |
 |--------|------|--------|
@@ -152,11 +151,11 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 
 | Component   | Decision              | Reason                                      |
 |------------|----------------------|--------------------------------------------|
-| ECS         | Serverless Fargate    | No EC2 maintenance, pay per use            |
+| ECS         | Serverless Fargate    | No EC2 maintenance — pay per use            |
 | RDS         | db.t3.micro           | Right-sized for current workload            |
 | Autoscaling | 2 to 6 tasks          | Scales only under genuine demand            |
 | NAT Gateway | Single NAT            | Eliminates cross-AZ duplication cost        |
-| CloudWatch  | Targeted alarms only  | Reduces unnecessary log  cost               |
+| CloudWatch  | Targeted alarms only  | Reduces unnecessary log ingestion cost      |
 | Backups     | 7-day retention       | Balanced recovery window vs storage spend   |
 | WAF         | Managed rule sets     | No custom rule authoring overhead           |
 | S3          | Limited versioning    | Controls storage growth overhead            |
@@ -188,4 +187,4 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 | rds                | RDS PostgreSQL instance, subnet group, parameter group, and snapshot        |
 | waf                | Web ACL, managed rule sets, and ALB association                             |
 
-Each module is self-contained and follows the DRY principle, keeping the infrastructure consistent and organised, making it straightforward to promote changes across environments.
+Each module is self-contained and follows the DRY principle — keeping the infrastructure consistent and organised, making it straightforward to promote changes across environments.

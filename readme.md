@@ -51,4 +51,47 @@ Extra two documents are accompanied with this project, covering the full deliver
 
 ---
 
-## DEMO
+
+## Demo
+
+Umami application running on  private ECS Fargate subnet behind an internet-facing ALB.
+
+![Application Running](assets/application-running.gif)
+
+---
+
+## CI/CD Pipeline
+
+### Container Build & Push
+
+Created a workflow that builds the Docker image, scans for vulnerabilities and pushes to ECR.
+
+![CI Workflow](assets/ci_yml.png)
+
+### Infrastructure as Code
+
+Infrastructure pipeline using `iac.yml` to provision all AWS infrastructure via Terraform.
+
+![IaC Workflow](assets/iac_yml.png)
+
+### Code Deployment Trigger
+
+Pipeline to trigger CodeDeploy for blue/green deployments.
+
+![CodeDeploy Workflow](assets/cd_yml.png)
+
+---
+
+## Zero-Downtime Deployment
+
+Successfully executed zero-downtime deployment via blue/green deployment on AWS CodeDeploy.
+
+![CodeDeploy Live](assets/cd.png)
+
+---
+
+## Security
+
+All credentials are stored in AWS Secrets Manager and AWS configuration is done through AWS OIDC. No hard coded credentials or key phreaes.
+
+
