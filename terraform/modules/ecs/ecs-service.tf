@@ -29,5 +29,8 @@ resource "aws_ecs_service" "umami-service" {
     aws_ecs_task_definition.umami_task_def
   ]
 
-
 }
+# CODE DPELOY 
+ deployment_controller {
+    type = "CODE_DEPLOY"
+  }
