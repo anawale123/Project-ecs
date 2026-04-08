@@ -1,5 +1,4 @@
 name: Deploy via CodeDeploy
-
 on:
   workflow_run:
     workflows: ["CODE TRIGGER with OIDC"]
@@ -11,14 +10,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
-
     permissions:
       id-token: write
       contents: read
-
     env:
       AWS_REGION: eu-west-2
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -32,9 +28,10 @@ jobs:
       - name: Trigger CodeDeploy
         run: |
           CONTENT=$(jq -Rs . < .github/deploy/appsec.yml)
-
+          REVISION=$(jq -n --argjson content "$CONTENT" \
+            '{"revisionType":"AppSpecContent","appSpecContent":{"content":$content}}')
           aws deploy create-deployment \
             --application-name ecs_code_deployment \
             --deployment-group-name ecs-blue-green \
             --region eu-west-2 \
-            --revision revisionType=AppSpecContent,appSpecContent='{"content": '"$CONTENT"'}'
+            --revision "$REVISION"
