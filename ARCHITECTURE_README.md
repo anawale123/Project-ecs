@@ -54,16 +54,14 @@ visual representation of the architecture deployed, showcasing dev pipelines, us
 
 | Rule | Path Pattern | Target Group      |
 |-----|-------------|------------------|
-| A    | /*           | UMAMI, TG         |
-| B    | /health      | UMAMU,TG          |
+| A    | /api/heartbeat | BLuE, TG        |
+| B    | /api/heartbeat | UMAMU,TG          |
 
 ### Target Groups
 
 | Target Group    | Port | Protocol | Health Check | Valid Codes |
 |----------------|------|---------|-------------|------------|
-| Umami (main)    | 3000 | HTTP     | /*           | 200–399     |
-| Umami (health)  | 3000 | HTTP     | /health      | 200–399     |
-| Blue            | 3000 | HTTP     | Default      | —           |
+| blue           | 3000 | HTTP     | /api/heartbeat | 200–399     |
 | Green           | 3000 | HTTP     | Default      | —           |
 
 ---
