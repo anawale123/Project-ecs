@@ -27,7 +27,7 @@ Run the application locally using the prewritten docker-compose.yml to verify th
 
 ### Pipeline Steps
 
-1. Configure AWS access via OIDC — no hardcoded secrets or keys  
+1. Configure AWS access via OIDC, no hardcoded secrets or keys  
 2. Build image  
 3. Scan image  
 4. Push to ECR  
