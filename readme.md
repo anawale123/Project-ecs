@@ -1,6 +1,6 @@
 # Full Stack AWS Deployment — ECS Fargate, Terraform, CI/CD Pipeline
 
-Stack: AWS ECS Fargate, ALB, RDS PostgreSQL, CodeDeploy, WAF, CloudWatch, Terraform
+**Stack:** AWS ECS Fargate, ALB, RDS PostgreSQL, CodeDeploy, WAF, CloudWatch, Terraform
 --
 
 End-to-end migration of a self-hosted web analytics platform onto AWS cloud infrastructure. The project covers the full delivery cycle from running the application locally with Docker Compose through to a production-grade deployment on AWS ECS Fargate, with infrastructure provisioned as code using Terraform and three CI/CD pipelines automating builds, infrastructure changes, and deployments.
