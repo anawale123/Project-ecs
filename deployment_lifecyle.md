@@ -40,7 +40,7 @@ The Umami repository consisted of its own pre-built Dockerfile. The source code 
 ![Vulnerabilities - scanned using Trivy](assests/trivy_json.png)
 
 The issues detected were caused by outdated Node.js dependencies next, effect. Updating these packages in package.json resolved the reported CVEs, and rebuilding the image produced a clean scan.
-(assests/ci_yml.png)
+[(assests/ci_yml.png)]
 
 
 ---
