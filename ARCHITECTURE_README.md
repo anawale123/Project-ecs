@@ -156,7 +156,7 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 | CloudWatch  | Targeted alarms only  | Reduces unnecessary log ingestion cost      |
 | Backups     | 7-day retention       | Balanced recovery window vs storage spend   |
 | WAF         | Managed rule sets     | No custom rule authoring overhead           |
-| S3          | Limited versioning    | Controls storage growth overhead            |
+
 
 ---
 
