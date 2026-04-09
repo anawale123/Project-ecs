@@ -62,7 +62,7 @@ visual representation of the architecture deployed, showcasing dev pipelines, us
 | Target Group    | Port | Protocol | Health Check | Valid Codes |
 |----------------|------|---------|-------------|------------|
 | blue           | 3000 | HTTP     | /api/heartbeat | 200–399     |
-| Green           | 3000 | HTTP     | Default      | —           |
+| Green           | 3000 | HTTP     |/api/heartbeat  | — 200–399  |
 
 ---
 
