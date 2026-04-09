@@ -32,6 +32,17 @@ Run the application locally using the prewritten docker-compose.yml to verify th
 3. Scan image  
 4. Push to ECR  
 
+
+### Docker Vulnerabilities
+
+The Umami repository consisted of its own pre-built Dockerfile. The source code contained a TypeScript script which acts as middleware between components. As for this, I considered that containerising the application would cause future complications and instead, moved onto to optimizing build time on the dockerfile by adding caching layer and using trivy for scanning vulneberabilities which were found.
+
+![Vulnerabilities - scanned using Trivy](assests/trivy_json.png)
+
+The issues detected were caused by outdated Node.js dependencies next, effect. Updating these packages in package.json resolved the reported CVEs, and rebuilding the image produced a clean scan.
+!(assests/ci_yml.png)
+
+
 ---
 
 ## Phase 1 — Dev
