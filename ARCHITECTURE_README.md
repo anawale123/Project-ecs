@@ -55,7 +55,7 @@ visual representation of the architecture deployed, showcasing dev pipelines, us
 | Rule | Path Pattern | Target Group      |
 |-----|-------------|------------------|
 | A    | /api/heartbeat | BLuE, TG        |
-| B    | /api/heartbeat | UMAMU,TG          |
+
 
 ### Target Groups
 
