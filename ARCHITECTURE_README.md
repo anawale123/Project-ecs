@@ -115,12 +115,7 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 
 ## Observability
 
-### cloudwatch
-## cloudwatch dashboard 
-
-
-## CloudWatch Dashboard
-## CloudWatch Dashboard
+### cloudwatch dashboard
 
 | Metric | Stat | Period |
 |--------|------|--------|
@@ -131,6 +126,20 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 | ECS Memory Utilization | Average | 60s |
 | ECS Running Task Count | Average | 60s |
 | WAF Blocked Requests | Sum | 300s |
+
+## CloudWatch Alarms
+
+| Component | Alarm Trigger |
+|----------|----------------|
+| **ECS Healthy Hosts** | Target group drops below 1 healthy task |
+| **ECS CPU** | CPU exceeds 80% over a short evaluation period |
+| **ECS Memory** | Memory exceeds 80% over two evaluation periods |
+| **ALB 5xx Errors** | Target 5xx responses exceed the defined threshold |
+| **ALB Latency** | Response time exceeds 1 second over multiple periods |
+| **RDS CPU High** | CPU remains above 80% over multiple periods |
+
+
+
 ---
 
 ## Security
