@@ -115,7 +115,7 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 
 ## Observability
 
-### cloudwatch dashboard
+### Cloudwatch Dashboard
 
 | Metric | Stat | Period |
 |--------|------|--------|
@@ -127,7 +127,7 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 | ECS Running Task Count | Average | 60s |
 | WAF Blocked Requests | Sum | 300s |
 
-## CloudWatch Alarms
+### CloudWatch Alarms
 
 | Component | Alarm Trigger |
 |----------|----------------|
