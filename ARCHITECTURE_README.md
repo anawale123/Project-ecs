@@ -105,18 +105,6 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 
 ---
 
-## Autoscaling
-
-| Component         | Configuration                                          |
-|------------------|------------------------------------------------------|
-| Scaling Target    | Min 2 tasks — Max 6 tasks                             |
-| CPU Scale Out     | Target tracking at 60% · Cooldown: 30s out / 120s in |
-| Memory Scale Out  | Target tracking at 70%                                |
-| CPU Scale In      | Step scaling below threshold · Cooldown: 180s         |
-| CPU Low Alarm     | Triggered below 30% across 2 consecutive periods      |
-
----
-
 ## Observability
 
 ### Cloudwatch Dashboard
@@ -164,7 +152,6 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 |------------|----------------------|--------------------------------------------|
 | ECS         | Serverless Fargate    | No EC2 maintenance — pay per use            |
 | RDS         | db.t3.micro           | Right-sized for current workload            |
-| Autoscaling | 2 to 6 tasks          | Scales only under genuine demand            |
 | NAT Gateway | Single NAT            | Eliminates cross-AZ duplication cost        |
 | CloudWatch  | Targeted alarms only  | Reduces unnecessary log ingestion cost      |
 | Backups     | 7-day retention       | Balanced recovery window vs storage spend   |
