@@ -2,8 +2,7 @@
 
 **Stack:** AWS ECS Fargate, ALB, RDS PostgreSQL, CodeDeploy, WAF, CloudWatch, Terraform
 --
-
-End-to-end migration of a self-hosted web analytics platform onto AWS cloud infrastructure. The project covers the full delivery cycle from running the application locally with Docker Compose through to a production-grade deployment on AWS ECS Fargate, with infrastructure provisioned as code using Terraform and three CI/CD pipelines automating builds, infrastructure changes, and deployments.
+Production deployment of Umami, an open-source web analytics platform migrated onto AWS ECS Fargate — covering the full delivery cycle from local Docker Compose through to a Terraform-provisioned cloud environment with three CI/CD pipelines automating builds, infrastructure changes, and deployments.
 
 ---
 
@@ -26,8 +25,7 @@ End-to-end migration of a self-hosted web analytics platform onto AWS cloud infr
 ## Service
 
 ### Umami — Web Analytics
-
-Umami is an open-source, self-hosted web analytics application. It collects and displays website traffic data, providing an alternative to third-party analytics platforms that can be fully owned and operated on private infrastructure.
+Umami is an open-source, self-hosted web analytics platform that collects and displays website traffic data. It's an alternative to third-party platforms as the data is stored in your infrastructure. 
 
 Source: https://github.com/umami-software/umami
 
@@ -43,7 +41,7 @@ Source: https://github.com/umami-software/umami
 
 ## Documentation
 
-Extra two documents are accompanied with this project, covering the full delivery process and the infrastructure in detail.
+Two additional documents accompany this project, covering the full delivery process and the infrastructure in detail.
 
 | Document               | Covers                                                                 |
 |------------------------|------------------------------------------------------------------------|
