@@ -1,15 +1,13 @@
 # Architecture README
 ## AWS Cloud Infrastructure — ECS Fargate, RDS, ALB, CodeDeploy, WAF, CloudWatch, Terraform
 
+## Umami Application Stack
 
-Umami application stack
-
-Frontend: Next.js
-Runtime: Node.js, Express
-Database: PostgreSQL, Prisma ORM
+- **Frontend:** Next.js
+- **Runtime:** Node.js, Express
+- **Database:** PostgreSQL, Prisma ORM
 
 The application is containerised locally with Docker Compose and deployed onto AWS ECS Fargate, with the VPC built from scratch using Terraform. A CI/CD pipeline handles building and pushing Docker images to ECR and triggering deployments to ECS.
-
 ## Architecture Diagram
 
 visual representation of the architecture deployed, showcasing dev pipelines, user interactions and components built and provision on terraform 
@@ -60,7 +58,7 @@ visual representation of the architecture deployed, showcasing dev pipelines, us
 
 | Rule | Path Pattern | Target Group      |
 |-----|-------------|------------------|
-| A    | /api/heartbeat | BLue, TG        |
+| A    | /api/heartbeat | Blue, TG        |
 
 
 ### Target Groups
@@ -68,7 +66,7 @@ visual representation of the architecture deployed, showcasing dev pipelines, us
 | Target Group    | Port | Protocol | Health Check | Valid Codes |
 |----------------|------|---------|-------------|------------|
 | blue           | 3000 | HTTP     | /api/heartbeat | 200–399     |
-| Green           | 3000 | HTTP     |/api/heartbeat  | — 200–399  |
+| Green           | 3000 | HTTP     |/api/heartbeat  |  200–399  |
 
 ---
 
