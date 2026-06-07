@@ -25,7 +25,7 @@ Production deployment of Umami, an open-source web analytics platform migrated o
 ## Service
 
 ### Umami — Web Analytics
-Umami is an open-source, self-hosted web analytics platform that collects and displays website traffic data. It's an alternative to third-party platforms as the data is stored in your infrastructure. 
+Umami is an open-source, self-hosted web analytics platform that collects and displays website traffic data. It's an alternative to third-party platforms as the data is stored in your own infrastructure. 
 
 Source: https://github.com/umami-software/umami
 
