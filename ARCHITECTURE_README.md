@@ -1,9 +1,15 @@
 # Architecture README
 ## AWS Cloud Infrastructure — ECS Fargate, RDS, ALB, CodeDeploy, WAF, CloudWatch, Terraform
 
-A full-stack monolithic web application built with Next.js for the frontend, running on the Node.js runtime, using Express as the backend server and Prisma as the ORM for PostgreSQL. The application is containerised locally with Docker Compose and deployed onto AWS ECS Fargate, with the VPC built from scratch using Terraform. A CI/CD pipeline handles building and pushing Docker images to ECR and triggering deployments to ECS.
 
-The infrastructure is designed to be production-ready with high availability, strong security practices, and full observability across all components.
+Umami application stack
+
+Frontend: Next.js
+Runtime: Node.js, Express
+Database: PostgreSQL, Prisma ORM
+
+The application is containerised locally with Docker Compose and deployed onto AWS ECS Fargate, with the VPC built from scratch using Terraform. A CI/CD pipeline handles building and pushing Docker images to ECR and triggering deployments to ECS.
+
 ## Architecture Diagram
 
 visual representation of the architecture deployed, showcasing dev pipelines, user interactions and components built and provision on terraform 
@@ -54,7 +60,7 @@ visual representation of the architecture deployed, showcasing dev pipelines, us
 
 | Rule | Path Pattern | Target Group      |
 |-----|-------------|------------------|
-| A    | /api/heartbeat | BLuE, TG        |
+| A    | /api/heartbeat | BLue, TG        |
 
 
 ### Target Groups
@@ -194,4 +200,4 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 | rds                | RDS PostgreSQL instance, subnet group, parameter group, and snapshot        |
 | waf                | Web ACL, managed rule sets, and ALB association                             |
 
-Each module is self-contained and follows the DRY principle — keeping the infrastructure consistent and organised, making it straightforward to promote changes across environments.
+Each module is self-contained and follows the DRY principle keeping the infrastructure consistent and organised, making it straightforward to promote changes across environments.
