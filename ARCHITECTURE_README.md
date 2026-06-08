@@ -176,7 +176,6 @@ Blue is the live version; Green is the incoming version. Traffic shifts only aft
 | Module             | Purpose                                                                    |
 |-------------------|---------------------------------------------------------------------------|
 | alb                | Application Load Balancer, listeners, target groups, and listener rules    |
-| auto_scaling       | ECS autoscaling policies and CloudWatch scale-in/out alarms                |
 | cloudwatch         | Dashboard, log groups, and alarms across ECS, ALB, and RDS                 |
 | code_deployment    | CodeDeploy application and blue/green deployment group configuration        |
 | ecs                | ECS cluster, Umami service, and task definition                            |
