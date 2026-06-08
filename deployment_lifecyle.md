@@ -35,7 +35,7 @@ Run the application locally using the prewritten docker-compose.yml to verify th
 
 ### Docker Vulnerabilities
 
-The Umami repository consisted of its own pre-built Dockerfile. The source code contained a TypeScript script which acts as middleware between components. As for this, I considered that containerising the application would cause future complications and instead, moved onto to optimizing build time on the dockerfile by adding caching layer and using trivy for scanning vulneberabilities which were found.
+The Umami repository consisted of its own pre-built Dockerfile. The source code contained a TypeScript script which acts as middleware between components. As for this, I considered that containerising the application would cause future complications and instead, moved onto to optimising build time on the dockerfile by adding caching layer and using trivy for scanning vulnerabilities which were found.
 
 ![Vulnerabilities - scanned using Trivy](assests/trivy_json.png)
 
@@ -84,7 +84,7 @@ Production-equivalent setup built on top of the dev stage. The aim is to catch a
 
 ## Phase 3 — Production
 
-Full production setup with zero-downtime deployments, autoscaling and complete observability. Domain: umami-analytics.co.uk.
+Full production setup with zero-downtime deployments and complete observability. Domain: umami-analytics.co.uk.
 
 ### Added in This Stage
 
@@ -92,7 +92,6 @@ Full production setup with zero-downtime deployments, autoscaling and complete o
 |---------------------------|----------------------------------------------------------------------|
 | CodeDeploy                | Blue/green deployment with traffic control                           |
 | Blue / Green Target Groups| Zero-downtime cutover, 5 min termination wait                        |
-| Autoscaling               | Min 2 tasks, max 6 — CPU target 60%, memory target 70%               |
 | CloudWatch Alarms         | ECS CPU/memory, ALB 5xx, ALB latency, RDS CPU, green TG healthy hosts|
 
 ### Pipeline Steps
