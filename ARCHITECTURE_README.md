@@ -12,7 +12,9 @@ The application is containerised locally with Docker Compose and deployed onto A
 
 visual representation of the architecture deployed, showcasing dev pipelines, user interactions and components built and provision on terraform 
 
-<img src="assests/ecs.drawio.xml" alt="Architecture Diagram">
+<img src="assests/ecs-Page-1.drawio.png" alt="Architecture Diagram">
+
+
 
 
 ---
