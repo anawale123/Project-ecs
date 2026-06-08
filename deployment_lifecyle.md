@@ -49,7 +49,7 @@ The issues detected were caused by outdated Node.js dependencies next, effect. U
 
 ## Phase 1 — Dev
 
-Smoke test — get the application running on minimal AWS infrastructure. The docker-compose.yml is used as the reference for the Terraform configuration and ECS task definition.
+Smoke test — get the application running on minimal AWS infrastructure. The docker-compose.yml is used as the reference for the VPC configuration and ECS task definition.
 
 ### Infrastructure Provisioned
 
@@ -68,7 +68,7 @@ Smoke test — get the application running on minimal AWS infrastructure. The do
 
 ## Phase 2 — Staging
 
-Production-equivalent setup built on top of the dev stage. The aim is to catch any issues before prod.
+Staging mirrors the production environment as closely as possible. The objective is to validate the full infrastructure and catch any issues before the final deployment.
 
 ### Additional resources introduced in this phase
 
@@ -84,7 +84,7 @@ Production-equivalent setup built on top of the dev stage. The aim is to catch a
 
 ## Phase 3 — Production
 
-Full production setup with zero-downtime deployments and complete observability. Domain: umami-analytics.co.uk.
+Full production setup built on top of staging phase. introduces CodeDeploy blue/green deployment configured for zero-downtime rollouts, CloudWatch alarms covering ECS, ALB and RDS. Domain: umami-analytics.co.uk.
 
 ### Added in This Stage
 
