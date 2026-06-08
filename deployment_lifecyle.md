@@ -103,15 +103,6 @@ Full production setup with zero-downtime deployments and complete observability.
 5. Blue task set terminated after 5 minute wait  
 6. CloudWatch alarms monitor post-deploy  
 
-### Autoscaling Thresholds
-
-| Metric       | Scale Out             | Scale In                |
-|--------------|----------------------|-------------------------|
-| CPU          | 60%                  | Below 30% for 2 periods |
-| Memory       | 70%                  | Same cooldown as CPU    |
-| Cooldown out | 30s                  | —                       |
-| Cooldown in  | 120s                 | —                       |
-
 ---
 
 ## Terraform Structure
@@ -126,4 +117,3 @@ Full production setup with zero-downtime deployments and complete observability.
 | cloudwatch        | Dashboard, log groups and alarms across ECS, ALB and RDS    |
 | waf               | Web ACL, managed rule set and ALB association                |
 | code_deployment   | CodeDeploy application and blue/green deployment group       |
-| auto_scaling      | ECS service autoscaling policies and CloudWatch alarms       |
