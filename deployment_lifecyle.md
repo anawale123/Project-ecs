@@ -70,7 +70,7 @@ Smoke test — get the application running on minimal AWS infrastructure. The do
 
 Production-equivalent setup built on top of the dev stage. The aim is to catch any issues before prod.
 
-### Additional resources introduced in this Phase
+### Additional resources introduced in this phase
 
 | Resource           | Purpose                                       |
 |-------------------|-----------------------------------------------|
