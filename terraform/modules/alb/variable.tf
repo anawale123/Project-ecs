@@ -28,3 +28,8 @@ variable "certificate_arn" {
   type = string
   description = " acm certification for dns variable"
 }
+
+variable "environment" {
+    description = "environment phase " 
+    type        =  string 
+}
