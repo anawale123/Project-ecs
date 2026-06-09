@@ -55,7 +55,8 @@ Two additional documents accompany this project, covering the full delivery proc
 
 Umami application running on  private ECS Fargate subnet behind an internet-facing ALB.
 
-![Application Running](assests/application-running.gif)
+[Watch Demo](https://youtu.be/vdDfAFzbwxA)
+
 
 ---
 
