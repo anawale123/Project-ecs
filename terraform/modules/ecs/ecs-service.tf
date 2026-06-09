@@ -33,4 +33,8 @@ resource "aws_ecs_service" "umami-service" {
   depends_on = [
     aws_ecs_task_definition.umami_task_def
   ]
+  tags = {
+    Environment = var.environment
+    
+  }
 }

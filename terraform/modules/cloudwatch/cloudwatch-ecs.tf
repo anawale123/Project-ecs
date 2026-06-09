@@ -3,6 +3,11 @@ resource "aws_cloudwatch_log_group" "umami_logs" {
   name              = "/ecs/umami-ecs-service"
   retention_in_days = 7
 
+  tags = {
+    Environment = var.environment
+    
+  }
+
 }
 
 # CLOUDWATCH HOST CHECK
@@ -22,6 +27,11 @@ resource "aws_cloudwatch_metric_alarm" "host_check" {
   }
 
   alarm_description = "Trigger when green tasks become unhealthy"
+
+  tags = {
+    Environment = var.environment
+    
+  }
 }
 
 # CLOUDWATCH CPU ECS 
@@ -41,6 +51,10 @@ resource "aws_cloudwatch_metric_alarm" "ecs_cpu" {
     ClusterName = var.cluster 
     service     = var.service
   }
+  tags = {
+    Environment = var.environment
+    
+  }
 }
 
 # CLOUDWATCH ECS RAM
@@ -59,6 +73,10 @@ resource "aws_cloudwatch_metric_alarm" "ecs_ram" {
   dimensions = {
     ClusterName = var.cluster 
     service     = var.service
+  }
+  tags = {
+    Environment = var.environment
+    
   }
 }
 

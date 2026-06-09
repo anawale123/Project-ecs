@@ -5,14 +5,19 @@ resource "aws_route" "private_route" {
     route_table_id      =   aws_route_table.private_rt.id
     destination_cidr_block = "0.0.0.0/0"
     nat_gateway_id         = aws_nat_gateway.nat_gw.id 
+    tags = {
+    Environment = var.environment
+    
+  }
 }
 
 # PRIVATE ROUTE TABLE
 resource "aws_route_table" "private_rt" {
   vpc_id = aws_vpc.vpc_app.id
 
-  tags = {
-    Name = "private-route-table"
+ tags = {
+    Environment = var.environment
+    
   }
 }
 
@@ -20,10 +25,18 @@ resource "aws_route_table" "private_rt" {
 resource "aws_route_table_association" "private_assoc" {
   subnet_id      = aws_subnet.private_ecs.id
   route_table_id = aws_route_table.private_rt.id
+  tags = {
+    Environment = var.environment
+    
+  }
 }
 
 # ROUTE TABLE ASSIOCIATION FOR PRIVATE ROUTE B
 resource "aws_route_table_association" "private_assoc_b" {
   subnet_id      = aws_subnet.private_rds.id
   route_table_id = aws_route_table.private_rt.id
+  tags = {
+    Environment = var.environment
+    
+  }
 }

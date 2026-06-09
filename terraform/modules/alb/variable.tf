@@ -1,8 +1,13 @@
+variable "environment" {
+  type = string 
+}
+
 # VPC ID VARIABLE
 variable "vpc_id" {
   description = "main aws_vpc"
   type        = string
 }
+
 
 
 # ALB SG VARIABLE
@@ -27,9 +32,4 @@ variable "domain_name" {
 variable "certificate_arn" {
   type = string
   description = " acm certification for dns variable"
-}
-
-variable "environment" {
-    description = "environment phase " 
-    type        =  string 
 }

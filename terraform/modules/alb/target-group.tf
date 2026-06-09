@@ -15,6 +15,10 @@ resource "aws_lb_target_group" "alb_tg_http" {
     unhealthy_threshold = 2
     matcher             = "200-399"
   }
+  tags = {
+    Environment = var.environment
+    
+  }
 }
 
 
@@ -35,6 +39,10 @@ resource "aws_lb_target_group" "blue_tg" {
     unhealthy_threshold = 2
     matcher             = "200-399"
   }
+  tags = {
+    Environment = var.environment
+    
+  }
 }
 
 # GREEN TARGET GROUP
@@ -52,6 +60,10 @@ resource "aws_lb_target_group" "green_tg" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     matcher             = "200-399"
+  }
+  tags = {
+    Environment = var.environment
+    
   }
 }
 

@@ -1,3 +1,7 @@
+variable "environment" {
+  type = string 
+}
+
 # ALB VARIABLE 
 variable "alb_name" {
     type        = string

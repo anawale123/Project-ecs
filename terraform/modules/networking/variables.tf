@@ -1,3 +1,7 @@
+variable "environment" {
+  type = string 
+}
+
 
 # VPC CIDR BLOCK
 variable "vpc_cidr" {

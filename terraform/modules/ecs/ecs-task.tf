@@ -69,4 +69,9 @@ resource "aws_ecs_task_definition" "umami_task_def" {
   ])
   # CLOUD WATCH 
   depends_on = [var.cloudwatch]
+
+  tags = {
+    Environment = var.environment
+    
+  }
 }

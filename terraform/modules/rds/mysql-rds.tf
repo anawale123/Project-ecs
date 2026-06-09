@@ -4,7 +4,7 @@ resource "aws_db_subnet_group" "umami_db_subnet_group" {
   subnet_ids = var.private_rds
 
   tags = {
-    Name = "umami-db-subnets"
+    Environment = var.environment
   }
 }
 # DB CREDENTIALS
@@ -53,8 +53,8 @@ resource "aws_db_instance" "umami_rds" {
     "upgrade"
   ]
 
-  tags = {
-    Name = "umami-rds"
+ tags = {
+    Environment = var.environment
   }
 }
 

@@ -32,6 +32,9 @@ resource "aws_wafv2_web_acl" "staging_waf" {
       sampled_requests_enabled   = true
     }
   }
+  tags = {
+    Environment = var.environment
+  }
 }
 
 # WAF association with ALB

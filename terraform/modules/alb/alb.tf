@@ -11,6 +11,7 @@ resource "aws_lb" "alb_main" {
   
 
   tags = {
-    Environment = "production"
+    Environment = var.environment
+    
   }
 }

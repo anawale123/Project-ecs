@@ -1,3 +1,7 @@
+variable "environment" {
+  type = string 
+}
+
 # VPC ID VARIABLE 
 variable "vpc_id" {
   description = "VPC for rds " 

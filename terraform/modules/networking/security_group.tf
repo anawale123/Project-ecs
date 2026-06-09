@@ -30,7 +30,9 @@ resource "aws_security_group" "alb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = { Name = "alb_sg" }
+  tags = {
+    Environment = var.environment
+  }
 }
 
 
@@ -79,7 +81,9 @@ resource "aws_security_group" "ecs_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }  
 
-  tags = { Name = "ecs_sg" }
+  tags = {
+    Environment = var.environment
+  }
 }
 
 
@@ -106,5 +110,7 @@ resource "aws_security_group" "mysql_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = { Name = "mysql_sg" }
+  tags = {
+    Environment = var.environment
+  }
 }

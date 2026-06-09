@@ -27,4 +27,8 @@ resource "aws_lb_listener" "http_redirect" {
       status_code = "HTTP_301"
     }
   }
+  tags = {
+    Environment = var.environment
+    
+  }
 }

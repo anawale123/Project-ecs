@@ -41,4 +41,8 @@ resource "aws_codedeploy_deployment_group" "ecs" {
       }
     }
   }
+  tags = {
+    Environment = var.environment
+    
+  }
 }

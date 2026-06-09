@@ -63,4 +63,9 @@ module "rds" {
 }
 
 
+variable "environment" {
+  type = string
+  default = "dev"
+}
+
 

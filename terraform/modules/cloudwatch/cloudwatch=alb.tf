@@ -2,6 +2,11 @@
 resource "aws_cloudwatch_log_group" "cloudwatch_alb" {
   name              = "aws-waf-logs-staging"
   retention_in_days = 7
+
+  tags = {
+    Environment = var.environment
+    
+  }
 }
 
 # ALB GREEN TG ALARM FOR ROLLS (ALB5XX)
@@ -20,6 +25,11 @@ resource "aws_cloudwatch_log_group" "cloudwatch_alb" {
   }
 
   alarm_description = "Triggers when ALB target 5xx errors spike"
+
+  tags = {
+    Environment = var.environment
+    
+  }
 }
 
 # ALB LATENCY ALARM
@@ -39,4 +49,9 @@ resource "aws_cloudwatch_metric_alarm" "alb_latency_high" {
 
   alarm_description = "Triggers when ALB latency exceeds 1 second"
   treat_missing_data = "missing"
+
+  tags = {
+    Environment = var.environment
+    
+  }
 }

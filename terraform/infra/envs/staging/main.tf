@@ -78,3 +78,8 @@ module "waf" {
   cloudwatch_waf_logs = module.cloudwatch.cloudwatch_waf_logs
 }
 
+
+variable "environment" {
+  type = string
+  default = "staging"
+}

@@ -97,3 +97,9 @@ module "auto-scaling" {
     service        = module.ecs.service
 
 }
+
+
+variable "environment" {
+  type = string
+  default = "prod"
+}

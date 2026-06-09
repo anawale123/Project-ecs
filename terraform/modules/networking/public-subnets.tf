@@ -6,7 +6,7 @@ resource "aws_subnet" "alb_subnet" {
   availability_zone = "eu-west-2c"
 
   tags = {
-    Name = "alb-subnet"
+    Environment = var.environment
   }
 }
 
@@ -17,7 +17,7 @@ resource "aws_subnet" "public_natgateway" {
  
 
   tags = {
-    Name = "public-natgateway"
+    Environment = var.environment
   }
 }
 
@@ -29,6 +29,6 @@ resource "aws_subnet" "alb_subnet_b" {
 
 
   tags = {
-    Name = "alb-subnet-b"
+    Environment = var.environment
   }
 }

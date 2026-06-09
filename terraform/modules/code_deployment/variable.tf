@@ -1,3 +1,10 @@
+
+variable "environment" {
+    description = "environment phase " 
+    type        =  string 
+}
+
+
 # ECS CODE DEPLOY IAM ROLE VARIABLE 
 variable "codedeploy_role_arn"{
     type = string 

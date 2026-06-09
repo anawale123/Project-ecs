@@ -112,4 +112,9 @@ resource "aws_cloudwatch_dashboard" "umami_dashboard" {
 
     ]
   })
+
+  tags = {
+    Environment = var.environment
+    
+  }
 }

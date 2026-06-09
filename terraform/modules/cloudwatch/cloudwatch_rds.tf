@@ -15,4 +15,9 @@ resource "aws_cloudwatch_metric_alarm" "rds_cpu_high" {
 
   alarm_description = "Triggers when RDS CPU exceeds 80%"
   treat_missing_data = "missing"
+
+  tags = {
+    Environment = var.environment
+    
+  }
 }

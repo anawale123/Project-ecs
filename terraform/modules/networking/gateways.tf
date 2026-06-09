@@ -4,7 +4,8 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc_app.id
 
   tags = {
-    Name = "main"
+    Environment = var.environment
+    
   }
 }
 
@@ -13,7 +14,8 @@ resource "aws_eip" "nat_eip" {
   domain = "vpc"
 
   tags = {
-    Name = "nat-eip"
+    Environment = var.environment
+    
   }
 }
 
@@ -23,9 +25,9 @@ resource "aws_nat_gateway" "nat_gw" {
   subnet_id     = aws_subnet.public_natgateway.id
 
   tags = {
-    Name = "gw NAT"
+    Environment = var.environment
+    
   }
-
 
   depends_on = [aws_internet_gateway.igw]
 }
