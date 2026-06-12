@@ -45,8 +45,8 @@ Two additional documents accompany this project, covering the full delivery proc
 
 | Document               | Covers                                                                 |
 |------------------------|------------------------------------------------------------------------|
-| Deployment Lifecycle   | Step-by-step record of how the platform was delivered across four phases, local testing, dev, staging, and production including the CI/CD pipelines and vulnerability findings from image scanning |
-| Architecture README    | Full infrastructure reference networking, compute, database, autoscaling, blue/green deployment, observability, security, cost decisions, and Terraform module structure |
+| [Deployment Lifecycle](deployment_lifecyle.md)  | Step-by-step record of how the platform was delivered across four phases, local testing, dev, staging, and production including the CI/CD pipelines and vulnerability findings from image scanning |
+| [Architecture README](ARCHITECTURE_README.md)   | Full infrastructure reference networking, compute, database, autoscaling, blue/green deployment, observability, security, cost decisions, and Terraform module structure |
 
 ---
 
